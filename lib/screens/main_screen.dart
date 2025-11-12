@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'home_screen.dart';
 import 'chat_screen.dart';
 import 'social_screen.dart';
-import 'news_screen.dart';
+import 'profile_screen.dart';
 import '../models/crypto_coin.dart';
 import '../providers/chat_provider.dart';
 
@@ -42,7 +42,7 @@ class _MainScreenState extends ConsumerState<MainScreen> {
         children: [
           HomeScreen(onAIAnalysis: _handleAIAnalysis),
           const SocialScreen(),
-          const NewsScreen(),
+          const ProfileScreen(),
           const ChatScreen(),
         ],
       ),
@@ -65,9 +65,9 @@ class _MainScreenState extends ConsumerState<MainScreen> {
             label: 'Feed',
           ),
           NavigationDestination(
-            icon: Icon(Icons.newspaper_outlined),
-            selectedIcon: Icon(Icons.newspaper),
-            label: 'News',
+            icon: Icon(Icons.person_outline),
+            selectedIcon: Icon(Icons.person),
+            label: 'Profile',
           ),
           NavigationDestination(
             icon: Icon(Icons.chat_bubble_outline),
