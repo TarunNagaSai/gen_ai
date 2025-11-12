@@ -31,10 +31,9 @@ class OpenAIService {
         },
         body: jsonEncode({
           'model': model,
-          'messages': messages.map((msg) => {
-            'role': msg.role.name,
-            'content': msg.content,
-          }).toList(),
+          'messages': messages
+              .map((msg) => {'role': msg.role.name, 'content': msg.content})
+              .toList(),
           'temperature': temperature,
         }),
       );
@@ -70,10 +69,9 @@ class OpenAIService {
 
       request.body = jsonEncode({
         'model': model,
-        'messages': messages.map((msg) => {
-          'role': msg.role.name,
-          'content': msg.content,
-        }).toList(),
+        'messages': messages
+            .map((msg) => {'role': msg.role.name, 'content': msg.content})
+            .toList(),
         'temperature': temperature,
         'stream': true,
       });
@@ -87,7 +85,7 @@ class OpenAIService {
             if (line.startsWith('data: ')) {
               final data = line.substring(6);
               if (data.trim() == '[DONE]') continue;
-              
+
               try {
                 final json = jsonDecode(data);
                 final content = json['choices'][0]['delta']['content'];

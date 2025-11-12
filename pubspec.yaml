@@ -49,6 +49,15 @@ dependencies:
   
   # Internationalization
   intl: ^0.19.0
+  
+  # Charts
+  fl_chart: ^0.69.0
+  
+  # WebSocket for real-time crypto data
+  web_socket_channel: ^3.0.1
+  
+  # URL launcher for opening links
+  url_launcher: ^6.3.0
 
 dev_dependencies:
   flutter_test:

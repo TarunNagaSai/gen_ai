@@ -29,7 +29,7 @@ class _TypingIndicatorState extends State<TypingIndicator>
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
       child: Row(
@@ -46,11 +46,7 @@ class _TypingIndicatorState extends State<TypingIndicator>
                 ],
               ),
             ),
-            child: const Icon(
-              Icons.smart_toy,
-              color: Colors.white,
-              size: 20,
-            ),
+            child: const Icon(Icons.smart_toy, color: Colors.white, size: 20),
           ),
           const SizedBox(width: 8),
           Container(
@@ -80,7 +76,7 @@ class _TypingIndicatorState extends State<TypingIndicator>
                     final delay = index * 0.2;
                     final value = (_controller.value - delay) % 1.0;
                     final opacity = (value < 0.5 ? value * 2 : (1 - value) * 2);
-                    
+
                     return Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 2),
                       child: Container(
@@ -88,8 +84,9 @@ class _TypingIndicatorState extends State<TypingIndicator>
                         height: 8,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: theme.colorScheme.onSurface
-                              .withOpacity(0.3 + opacity * 0.4),
+                          color: theme.colorScheme.onSurface.withOpacity(
+                            0.3 + opacity * 0.4,
+                          ),
                         ),
                       ),
                     );

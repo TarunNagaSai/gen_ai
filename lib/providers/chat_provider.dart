@@ -14,11 +14,7 @@ class ChatState {
   final bool isLoading;
   final String? error;
 
-  ChatState({
-    this.messages = const [],
-    this.isLoading = false,
-    this.error,
-  });
+  ChatState({this.messages = const [], this.isLoading = false, this.error});
 
   ChatState copyWith({
     List<Message>? messages,
@@ -48,9 +44,7 @@ class ChatNotifier extends StateNotifier<ChatState> {
       timestamp: DateTime.now(),
     );
 
-    state = state.copyWith(
-      messages: [...state.messages, message],
-    );
+    state = state.copyWith(messages: [...state.messages, message]);
   }
 
   Future<void> sendMessage(String content) async {
@@ -73,10 +67,7 @@ class ChatNotifier extends StateNotifier<ChatState> {
 
       state = state.copyWith(isLoading: false);
     } catch (e) {
-      state = state.copyWith(
-        isLoading: false,
-        error: e.toString(),
-      );
+      state = state.copyWith(isLoading: false, error: e.toString());
     }
   }
 
@@ -99,17 +90,17 @@ class ChatNotifier extends StateNotifier<ChatState> {
         timestamp: DateTime.now(),
       );
 
-      state = state.copyWith(
-        messages: [...state.messages, assistantMessage],
-      );
+      state = state.copyWith(messages: [...state.messages, assistantMessage]);
 
       // Stream AI response
       String accumulatedContent = '';
       await for (var chunk in _openAIService.sendMessageStream(
-        messages: state.messages.where((m) => m.id != assistantMessageId).toList(),
+        messages: state.messages
+            .where((m) => m.id != assistantMessageId)
+            .toList(),
       )) {
         accumulatedContent += chunk;
-        
+
         // Update the assistant message with accumulated content
         final updatedMessages = state.messages.map((msg) {
           if (msg.id == assistantMessageId) {
@@ -123,10 +114,7 @@ class ChatNotifier extends StateNotifier<ChatState> {
 
       state = state.copyWith(isLoading: false);
     } catch (e) {
-      state = state.copyWith(
-        isLoading: false,
-        error: e.toString(),
-      );
+      state = state.copyWith(isLoading: false, error: e.toString());
     }
   }
 
@@ -136,6 +124,66 @@ class ChatNotifier extends StateNotifier<ChatState> {
 
   void clearError() {
     state = state.copyWith(error: null);
+  }
+
+  Future<void> sendHiddenMessageWithStream(
+    String content,
+    String displayMessage,
+  ) async {
+    if (content.trim().isEmpty) return;
+
+    // Add user's display message (short version)
+    addMessage(displayMessage, MessageRole.user);
+
+    // Set loading state
+    state = state.copyWith(isLoading: true, error: null);
+
+    try {
+      // Create placeholder for streaming message
+      final assistantMessageId = _uuid.v4();
+      final assistantMessage = Message(
+        id: assistantMessageId,
+        content: '',
+        role: MessageRole.assistant,
+        timestamp: DateTime.now(),
+      );
+
+      state = state.copyWith(messages: [...state.messages, assistantMessage]);
+
+      // Create messages list with the full prompt but exclude the display message
+      final messagesForAPI = [
+        ...state.messages.where((m) => m.id != assistantMessageId).toList(),
+      ];
+      // Replace last user message with full content
+      messagesForAPI.last = Message(
+        id: messagesForAPI.last.id,
+        content: content,
+        role: MessageRole.user,
+        timestamp: messagesForAPI.last.timestamp,
+      );
+
+      // Stream AI response
+      String accumulatedContent = '';
+      await for (var chunk in _openAIService.sendMessageStream(
+        messages: messagesForAPI,
+      )) {
+        accumulatedContent += chunk;
+
+        // Update the assistant message with accumulated content
+        final updatedMessages = state.messages.map((msg) {
+          if (msg.id == assistantMessageId) {
+            return msg.copyWith(content: accumulatedContent);
+          }
+          return msg;
+        }).toList();
+
+        state = state.copyWith(messages: updatedMessages);
+      }
+
+      state = state.copyWith(isLoading: false);
+    } catch (e) {
+      state = state.copyWith(isLoading: false, error: e.toString());
+    }
   }
 }
 

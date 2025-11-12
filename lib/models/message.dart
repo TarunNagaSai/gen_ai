@@ -1,8 +1,4 @@
-enum MessageRole {
-  user,
-  assistant,
-  system,
-}
+enum MessageRole { user, assistant, system }
 
 class Message {
   final String id;

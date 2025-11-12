@@ -92,11 +92,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                   ],
                 ),
               ),
-              child: const Icon(
-                Icons.smart_toy,
-                color: Colors.white,
-                size: 24,
-              ),
+              child: const Icon(Icons.smart_toy, color: Colors.white, size: 24),
             ),
             const SizedBox(width: 12),
             Column(
@@ -135,15 +131,14 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                 : ListView.builder(
                     controller: _scrollController,
                     padding: const EdgeInsets.symmetric(vertical: 16),
-                    itemCount: chatState.messages.length +
+                    itemCount:
+                        chatState.messages.length +
                         (chatState.isLoading ? 1 : 0),
                     itemBuilder: (context, index) {
                       if (index == chatState.messages.length) {
                         return const TypingIndicator();
                       }
-                      return MessageBubble(
-                        message: chatState.messages[index],
-                      );
+                      return MessageBubble(message: chatState.messages[index]);
                     },
                   ),
           ),
@@ -153,17 +148,12 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
               color: theme.colorScheme.errorContainer,
               child: Row(
                 children: [
-                  Icon(
-                    Icons.error_outline,
-                    color: theme.colorScheme.error,
-                  ),
+                  Icon(Icons.error_outline, color: theme.colorScheme.error),
                   const SizedBox(width: 8),
                   Expanded(
                     child: Text(
                       chatState.error!,
-                      style: TextStyle(
-                        color: theme.colorScheme.error,
-                      ),
+                      style: TextStyle(color: theme.colorScheme.error),
                     ),
                   ),
                   IconButton(
@@ -241,11 +231,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                 'Explain quantum computing',
                 Icons.science_outlined,
               ),
-              _buildSuggestionChip(
-                theme,
-                'Write a poem',
-                Icons.edit_outlined,
-              ),
+              _buildSuggestionChip(theme, 'Write a poem', Icons.edit_outlined),
             ],
           ),
         ],
