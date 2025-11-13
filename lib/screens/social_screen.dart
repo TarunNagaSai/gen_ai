@@ -192,21 +192,6 @@ class _SocialScreenState extends ConsumerState<SocialScreen> {
         backgroundColor: theme.colorScheme.surface,
         title: Row(
           children: [
-            Container(
-              width: 40,
-              height: 40,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    theme.colorScheme.primary,
-                    theme.colorScheme.tertiary,
-                  ],
-                ),
-                shape: BoxShape.circle,
-              ),
-              child: const Icon(Icons.forum, color: Colors.white, size: 24),
-            ),
-            const SizedBox(width: 12),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

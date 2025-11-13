@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gpt_markdown/gpt_markdown.dart';
 import '../models/message.dart';
 import 'package:intl/intl.dart';
 
@@ -61,7 +62,7 @@ class MessageBubble extends StatelessWidget {
                       ),
                     ],
                   ),
-                  child: Text(
+                  child: GptMarkdown(
                     message.content,
                     style: theme.textTheme.bodyLarge?.copyWith(
                       color: isUser

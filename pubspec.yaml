@@ -58,6 +58,7 @@ dependencies:
   
   # URL launcher for opening links
   url_launcher: ^6.3.0
+  gpt_markdown: ^1.1.4
 
 dev_dependencies:
   flutter_test:

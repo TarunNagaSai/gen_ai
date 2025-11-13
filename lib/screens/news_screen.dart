@@ -186,21 +186,6 @@ class _NewsScreenState extends ConsumerState<NewsScreen> {
         backgroundColor: theme.colorScheme.surface,
         title: Row(
           children: [
-            Container(
-              width: 40,
-              height: 40,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    theme.colorScheme.primary,
-                    theme.colorScheme.secondary,
-                  ],
-                ),
-                shape: BoxShape.circle,
-              ),
-              child: const Icon(Icons.newspaper, color: Colors.white, size: 24),
-            ),
-            const SizedBox(width: 12),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

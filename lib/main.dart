@@ -21,7 +21,7 @@ class MyApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final authState = ref.watch(authProvider);
     return MaterialApp(
-      title: 'AI Chat',
+      title: 'Crypto AI Chat',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
@@ -38,7 +38,9 @@ class MyApp extends ConsumerWidget {
         useMaterial3: true,
       ),
       themeMode: ThemeMode.system,
-      home: authState.isAuthenticated ? const MainScreen() : const LoginScreen(),
+      home: authState.isAuthenticated
+          ? const MainScreen()
+          : const LoginScreen(),
     );
   }
 }

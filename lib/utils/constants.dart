@@ -1,0 +1,3 @@
+class Constants {
+  static String aiModel = "meta-llama-3.1-8b-instruct";
+}

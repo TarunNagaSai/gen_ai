@@ -158,17 +158,19 @@ class CryptoChartCard extends StatelessWidget {
               ),
             const SizedBox(height: 16),
             // AI Analysis button
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton.icon(
+            Align(
+              alignment: Alignment.centerRight,
+              child: FilledButton(
                 onPressed: onAIAnalysis,
-                icon: const Icon(Icons.psychology, size: 18),
-                label: const Text('AI Analysis'),
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 12),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: const Text('AI Analysis'),
                 ),
               ),
             ),

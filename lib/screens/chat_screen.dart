@@ -80,21 +80,6 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
         backgroundColor: theme.colorScheme.surface,
         title: Row(
           children: [
-            Container(
-              width: 40,
-              height: 40,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                gradient: LinearGradient(
-                  colors: [
-                    theme.colorScheme.tertiary,
-                    theme.colorScheme.tertiaryContainer,
-                  ],
-                ),
-              ),
-              child: const Icon(Icons.smart_toy, color: Colors.white, size: 24),
-            ),
-            const SizedBox(width: 12),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -186,16 +171,12 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
               shape: BoxShape.circle,
               gradient: LinearGradient(
                 colors: [
-                  theme.colorScheme.primary.withOpacity(0.2),
-                  theme.colorScheme.secondary.withOpacity(0.2),
+                  theme.colorScheme.tertiary,
+                  theme.colorScheme.tertiaryContainer,
                 ],
               ),
             ),
-            child: Icon(
-              Icons.chat_bubble_outline,
-              size: 60,
-              color: theme.colorScheme.primary,
-            ),
+            child: const Icon(Icons.smart_toy, color: Colors.white, size: 80),
           ),
           const SizedBox(height: 24),
           Text(

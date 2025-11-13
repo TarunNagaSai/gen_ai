@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gen_ai/screens/news_screen.dart';
 import 'home_screen.dart';
 import 'chat_screen.dart';
 import 'social_screen.dart';
@@ -41,9 +42,10 @@ class _MainScreenState extends ConsumerState<MainScreen> {
         index: _currentIndex,
         children: [
           HomeScreen(onAIAnalysis: _handleAIAnalysis),
+          const NewsScreen(),
           const SocialScreen(),
-          const ProfileScreen(),
           const ChatScreen(),
+          const ProfileScreen(),
         ],
       ),
       bottomNavigationBar: NavigationBar(
@@ -60,19 +62,25 @@ class _MainScreenState extends ConsumerState<MainScreen> {
             label: 'Market',
           ),
           NavigationDestination(
+            icon: Icon(Icons.newspaper),
+            selectedIcon: Icon(Icons.newspaper),
+            label: 'News',
+          ),
+          NavigationDestination(
             icon: Icon(Icons.forum_outlined),
             selectedIcon: Icon(Icons.forum),
             label: 'Feed',
+          ),
+
+          NavigationDestination(
+            icon: Icon(Icons.chat_bubble_outline),
+            selectedIcon: Icon(Icons.chat_bubble),
+            label: 'AI Chat',
           ),
           NavigationDestination(
             icon: Icon(Icons.person_outline),
             selectedIcon: Icon(Icons.person),
             label: 'Profile',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.chat_bubble_outline),
-            selectedIcon: Icon(Icons.chat_bubble),
-            label: 'AI Chat',
           ),
         ],
       ),

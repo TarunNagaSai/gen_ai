@@ -1,11 +1,12 @@
 import 'dart:convert';
+import 'package:gen_ai/utils/constants.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import '../models/message.dart';
 
 class OpenAIService {
   final String apiKey;
-  static const String baseUrl = 'https://api.openai.com/v1';
+  static const String baseUrl = 'http://192.168.0.5:1234/v1';
 
   OpenAIService({required this.apiKey});
 
@@ -19,18 +20,16 @@ class OpenAIService {
 
   Future<String> sendMessage({
     required List<Message> messages,
-    String model = 'gpt-3.5-turbo',
+    String? model,
     double temperature = 0.7,
   }) async {
+    final selectedModel = model ?? Constants.aiModel;
     try {
       final response = await http.post(
         Uri.parse('$baseUrl/chat/completions'),
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer $apiKey',
-        },
+        headers: {'Content-Type': 'application/json'},
         body: jsonEncode({
-          'model': model,
+          'model': selectedModel,
           'messages': messages
               .map((msg) => {'role': msg.role.name, 'content': msg.content})
               .toList(),
@@ -53,22 +52,20 @@ class OpenAIService {
 
   Stream<String> sendMessageStream({
     required List<Message> messages,
-    String model = 'gpt-3.5-turbo',
+    String? model,
     double temperature = 0.7,
   }) async* {
+    final selectedModel = model ?? Constants.aiModel;
+
     try {
       final request = http.Request(
         'POST',
         Uri.parse('$baseUrl/chat/completions'),
       );
 
-      request.headers.addAll({
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer $apiKey',
-      });
-
+      request.headers.addAll({'Content-Type': 'application/json'});
       request.body = jsonEncode({
-        'model': model,
+        'model': selectedModel,
         'messages': messages
             .map((msg) => {'role': msg.role.name, 'content': msg.content})
             .toList(),
@@ -85,7 +82,6 @@ class OpenAIService {
             if (line.startsWith('data: ')) {
               final data = line.substring(6);
               if (data.trim() == '[DONE]') continue;
-
               try {
                 final json = jsonDecode(data);
                 final content = json['choices'][0]['delta']['content'];
