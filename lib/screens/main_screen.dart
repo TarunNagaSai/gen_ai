@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gen_ai/providers/crypto_provider.dart';
 import 'package:gen_ai/screens/news_screen.dart';
 import 'home_screen.dart';
 import 'chat_screen.dart';
@@ -19,6 +20,8 @@ class _MainScreenState extends ConsumerState<MainScreen> {
   int _currentIndex = 0;
 
   void _handleAIAnalysis(CryptoCoin coin) {
+    ref.read(cryptoProvider.notifier).updateSelectedCoin(coin);
+
     // Switch to chat screen (now at index 3)
     setState(() {
       _currentIndex = 3;

@@ -1,3 +1,3 @@
 class Constants {
-  static String aiModel = "meta-llama-3.1-8b-instruct";
+  static String aiModel = "qwen/qwen3-vl-8b";
 }

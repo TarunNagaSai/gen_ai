@@ -6,7 +6,7 @@ import '../models/message.dart';
 
 class OpenAIService {
   final String apiKey;
-  static const String baseUrl = 'http://192.168.0.5:1234/v1';
+  static const String baseUrl = 'http://192.168.0.6:1234/v1';
 
   OpenAIService({required this.apiKey});
 

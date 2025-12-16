@@ -1,5 +1,7 @@
 # AI Chat & Crypto App 🤖📈
 
+![Image](assets/Crypto_AI.png)
+
 A modern, production-ready Flutter application featuring AI chat with OpenAI integration and real-time cryptocurrency market data. Built with clean architecture and Riverpod state management.
 
 ![Flutter](https://img.shields.io/badge/Flutter-3.9.2+-blue.svg)
@@ -16,7 +18,7 @@ A modern, production-ready Flutter application featuring AI chat with OpenAI int
 
 ### 📈 Crypto Market
 - Live cryptocurrency prices (BTC, ETH, ADA, etc.)
-- 7-day price charts with smooth graphs
+- 7-day price charts with smooth graphsE
 - 24h price change indicators
 - Pull-to-refresh for latest data
 - Beautiful card-based layout

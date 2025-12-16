@@ -12,18 +12,26 @@ class CryptoState {
   final List<CryptoCoin> coins;
   final bool isLoading;
   final String? error;
+  final CryptoCoin? selectedCoin;
 
-  CryptoState({this.coins = const [], this.isLoading = false, this.error});
+  CryptoState({
+    this.coins = const [],
+    this.isLoading = false,
+    this.error,
+    this.selectedCoin,
+  });
 
   CryptoState copyWith({
     List<CryptoCoin>? coins,
     bool? isLoading,
     String? error,
+    CryptoCoin? selectedCoin,
   }) {
     return CryptoState(
       coins: coins ?? this.coins,
       isLoading: isLoading ?? this.isLoading,
       error: error,
+      selectedCoin: selectedCoin ?? this.selectedCoin,
     );
   }
 }
@@ -45,6 +53,10 @@ class CryptoNotifier extends StateNotifier<CryptoState> {
     } catch (e) {
       state = state.copyWith(isLoading: false, error: e.toString());
     }
+  }
+
+  void updateSelectedCoin(CryptoCoin coin) {
+    state = state.copyWith(selectedCoin: coin);
   }
 
   Future<void> refreshCoins() async {
